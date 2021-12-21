@@ -44,7 +44,7 @@ def _format_report(report):
     }
 
 
-@router.get("/{org}/repos/{repo}/commits/{commit}/report")
+@router.get("/api/{org}/repos/{repo}/commits/{commit}/report")
 async def get_report(
     org: str, repo: str, commit: str, request: Request, project: Optional[str] = None
 ):
@@ -104,7 +104,7 @@ async def get_recent_pr_reports(request: Request, cursor: Optional[str] = None):
     return {"cursor": cursor, "result": result}
 
 
-@router.get("/{org}/repos/{repo}/reports")
+@router.get("/api/{org}/repos/{repo}/reports")
 async def get_reports(
     org: str, repo: str, request: Request, cursor: Optional[str] = None
 ):
@@ -116,7 +116,7 @@ async def get_reports(
     return {"cursor": cursor, "result": result}
 
 
-@router.get("/{org}/repos/{repo}/pulls/{pull}/{commit}/report")
+@router.get("/api/{org}/repos/{repo}/pulls/{pull}/{commit}/report")
 async def get_pr_report(
     org: str,
     repo: str,
@@ -134,7 +134,7 @@ async def get_pr_report(
     return JSONResponse({"reason": "notFound"}, status_code=404)
 
 
-@router.get("/{org}/repos/{repo}/pulls")
+@router.get("/api/{org}/repos/{repo}/pulls")
 async def get_pulls(org: str, repo: str, request: Request, cursor: Optional[str] = None):
     db = request.app.db
     result = []
@@ -144,7 +144,7 @@ async def get_pulls(org: str, repo: str, request: Request, cursor: Optional[str]
     return {"cursor": cursor, "result": result}
 
 
-@router.get("/{org}/repos/{repo}/commits/{commit}/files")
+@router.get("/api/{org}/repos/{repo}/commits/{commit}/files")
 async def get_files(
     org: str,
     repo: str,
@@ -165,7 +165,7 @@ async def get_files(
     }
 
 
-@router.get("/{org}/repos/{repo}/commits/{commit}/file")
+@router.get("/api/{org}/repos/{repo}/commits/{commit}/file")
 async def get_file(
     org: str,
     repo: str,
@@ -194,7 +194,7 @@ async def get_file(
     }
 
 
-@router.get("/{org}/repos/{repo}/commits/{commit}/download")
+@router.get("/api/{org}/repos/{repo}/commits/{commit}/download")
 async def download_file(
     org: str, repo: str, commit: str, request: Request, filename: str
 ):

@@ -23,7 +23,7 @@ COLORS = (
 )
 
 
-@router.get("/{org}/repos/{repo}/badge.svg")
+@router.get("/api/{org}/repos/{repo}/badge.svg")
 async def get_badge(
     request: Request,
     org: str,

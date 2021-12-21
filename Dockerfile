@@ -15,9 +15,11 @@ ENV PATH="/root/.poetry/bin:$PATH"
 
 RUN poetry config virtualenvs.create false
 
-COPY . /app
+COPY poetry.lock pyproject.toml Makefile .
 
 RUN make install
+
+COPY . /app
 
 EXPOSE 5000
 

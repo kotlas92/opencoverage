@@ -15,12 +15,13 @@ from .app import router
 logger = logging.getLogger(__name__)
 
 
-@router.post("/upload/v4")
+@router.post("/api/upload/v4")
 async def upload_coverage_v4(request: Request):
     settings = request.app.settings
-    path = os.path.join(settings.root_path, "upload-report")
+    path = os.path.join("/api", "upload-report")
     if path[0] != "/":
         path = "/" + path
+    logger.info(request)
     upload_url = str(request.url.replace(path=path))
     scheme = request.headers.get(
         "x-scheme", request.headers.get("x-forwarded-proto", "http")
@@ -32,7 +33,7 @@ async def upload_coverage_v4(request: Request):
     return PlainTextResponse(f"success\n{upload_url}")
 
 
-@router.put("/upload-report")
+@router.put("/api/upload-report")
 async def upload_report(
     request: Request,
     branch: str,
