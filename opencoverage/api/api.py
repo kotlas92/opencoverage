@@ -10,7 +10,7 @@ from opencoverage.clients.scm import get_client
 from .app import router
 
 
-@router.get("/{org}/repos")
+@router.get("/api/{org}/repos")
 async def get_repos(org: str, request: Request, cursor: Optional[str] = None):
     db = request.app.db
     result = []
@@ -55,7 +55,7 @@ async def get_report(
     return _format_report(report)
 
 
-@router.get("/recent-reports")
+@router.get("/api/recent-reports")
 async def get_recent_reports(
     request: Request, branch: Optional[str] = None, cursor: Optional[str] = None
 ):
@@ -94,7 +94,7 @@ def _format_pr_report(report: types.PRReportResult) -> Dict[str, Any]:
     }
 
 
-@router.get("/recent-pr-reports")
+@router.get("/api/recent-pr-reports")
 async def get_recent_pr_reports(request: Request, cursor: Optional[str] = None):
     db = request.app.db
     result = []
